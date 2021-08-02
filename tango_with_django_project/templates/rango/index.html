@@ -6,15 +6,29 @@
 {% endblock %}
 
 {% block body_block %}
-<h1>Rango says...</h1>
-<div>
+<div class="index_space">
+    <p></p>
+</div>
+<div class="welcome_box">
+    <p></p>
     {% if user.is_authenticated %}
-        howdy {{ user.username }}!
+        Welcome back {{ user.username }}!
     {% else %}
-        hey there partn er!
+    <div class="major">
+        Welcome
+    </div>
+    <div class="medium">
+    to 
+    </div>
+    <div class="medium">
+        Disney Fan Club
+    </div>
+    <p></p>
+    <div class="minor">
+    the ultimate fan community!
+    </div>
     {% endif %}
     <br />
-    <strong>{{ boldmessage }}</strong><br />
 </div>
 
 
@@ -31,6 +45,4 @@
     <strong>There are no pages present.</strong>
 {% endif %}
 </div>
-
-<img src="{% static 'images/rango.jpg' %}" alt="Picture of Rango" />
 {% endblock %}

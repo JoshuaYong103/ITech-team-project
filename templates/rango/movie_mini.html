@@ -1,0 +1,42 @@
+{% extends 'rango/base.html' %} {% load staticfiles %}
+
+
+{% block title_block %} Login {% endblock %}
+
+{% block body_block %}
+       <div class="container-fluid"> 
+           <div class="row">
+       
+               <div class="col">
+                <div class="row">   
+                    {% for i in obj.items %}
+                    <div class="col-md-3">
+                    <div class="card" style="width: 10rem; margin: 5px;">
+                    <img src={{i.image}} alt="movie picture" class="card-image-body">
+                    <div class="card-body">
+                        {{ i.title}}
+                    </div>
+
+                </div>
+            </div>
+                    {% endfor %}
+                  
+                    </div>
+                  
+               </div>
+               <!-- <div class="col-md-4">
+                hryyy
+                   </div> -->
+           </div>
+        
+
+      <!-- <div>{{ i.title}}</div> 
+        <div>
+            <img src={{i.image}} alt="movie picture" width="250px" height="250px">
+        <img>
+        </div>
+        <div>{{i.year}}</div> -->
+    
+
+    </div>
+    {% endblock %}

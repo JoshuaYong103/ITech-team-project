@@ -1,11 +1,14 @@
+from collections import namedtuple
+from django.core import paginator
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, request
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from rango.models import Category, Page
+from rango.models import Category, MovieLists, Page
 from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm
 from datetime import datetime
+from django.core.paginator import PageNotAnInteger, Paginator,EmptyPage
 import requests
 
 def index(request):
@@ -167,8 +170,34 @@ def visitor_cookie_handler(request):
 
 
 def show_movies(request):
-        result = requests.get('https://imdb-api.com/en/API/IMDbList/k_z846578b/ls033609554')
-        json = result.json()
-        return render(request, 
-                  "rango/movie_mini.html", 
-                  context={'obj': json})    
+    result = requests.get('https://imdb-api.com/en/API/IMDbList/k_6x2ikd97/ls004285275')
+    myjson=result.json()
+
+    MovieLists.objects.all().delete()
+   
+    for item in myjson['items']:
+        MovieLists.objects.create(movieid=item['id'], title=item['title'], fullTitle=item['fullTitle'], yearreleased=item['year'], imgpath=item['image'],imdbrating=item['imDbRating'],description=item['description'])
+        
+    myresult= MovieLists.objects.all()
+  
+
+    paginator=Paginator(myresult,10)
+    page=request.GET.get('page')
+
+    try:
+	    page = paginator.page(page)
+    except PageNotAnInteger:
+	    page = paginator.page(1)
+    except EmptyPage:
+        page=paginator.page(paginator.num_pages) 
+ 
+
+
+
+    myresult ={
+       'count':paginator.count,
+       'page': page
+   } 
+
+    print(myresult)
+    return render(request, 'rango/movie_mini.html',  myresult )

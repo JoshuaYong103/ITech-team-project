@@ -1,42 +1,62 @@
-{% extends 'rango/base.html' %} {% load staticfiles %}
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
 
-
-{% block title_block %} Login {% endblock %}
+{% block title_block %}
+    Register
+{% endblock %}
 
 {% block body_block %}
+
+
        <div class="container-fluid"> 
            <div class="row">
-       
                <div class="col">
-                <div class="row">   
-                    {% for i in obj.items %}
+                <div class="row" style="max-width:850px;margin:0 auto">   
+        
+                    {% for i in page %}
                     <div class="col-md-3">
-                    <div class="card" style="width: 10rem; margin: 5px;">
-                    <img src={{i.image}} alt="movie picture" class="card-image-body">
-                    <div class="card-body">
-                        {{ i.title}}
-                    </div>
+                      <div class="card" style="width: 10rem; margin: 5px;">
+                      <img src={{i.imgpath}} alt="movie picture" class="card-image-body">
+                      <div class="card-body">
+                          {{ i.title}}
+                           <div>{{ i.imdbrating}}</div>
+                           <div>{{ i.yearreleased}}</div>
+                      </div>
 
                 </div>
             </div>
-                    {% endfor %}
-                  
-                    </div>
-                  
-               </div>
-               <!-- <div class="col-md-4">
-                hryyy
-                   </div> -->
-           </div>
-        
-
-      <!-- <div>{{ i.title}}</div> 
-        <div>
-            <img src={{i.image}} alt="movie picture" width="250px" height="250px">
-        <img>
+            {% endfor %}
+            </div>
+            </div>
+            </div>
+            <nav aria-label="...">
+              
+            
+            {% if page.has_other_pages %}
+            <ul class="pagination">
+           {% if page.has_previous %}
+             <li class="page-item"><a class="page-link"  href="?page={{ page.previous_page_number }}">«</a></li>
+           {% else %}
+             <li class="disabled"><span>Previous</span></li>
+           {% endif %}
+           {% for i in page.paginator.page_range %}
+             {% if page.number == i %}
+            <li class="page-item active">
+              <a class="page-link" href="#">{{ i }} </a>
+             {% else %}
+             <li class="page-item"><a  class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+             {% endif %}
+           {% endfor %}
+           {% if page.has_next %}
+           <li class="page-item"><a class="page-link" href="?page={{ page.next_page_number }}">Next</a></li>
+           {% else %}
+             <li class="disabled"><span>»</span></li>
+           {% endif %}
+            </ul>
+          {% endif %}
+          </nav>
+          </div>
         </div>
-        <div>{{i.year}}</div> -->
-    
+          </div>
 
-    </div>
-    {% endblock %}
+  {% endblock %}

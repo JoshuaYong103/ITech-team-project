@@ -20,14 +20,17 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-class MovieLists:
-    movieid=models.CharField(max_length=15,unique=True)
-    title=models.CharField(max_length=120,unique=True)
-    fullTitle=models.CharField(max_length=250,unique=True)
+class MovieLists(models.Model):
+    movieid=models.CharField(primary_key=True,max_length=15,unique=True)
+    title=models.CharField(max_length=120,unique=False)
+    fullTitle=models.CharField(max_length=250,unique=False)
     yearreleased=models.IntegerField(null=True)
-    imgpath=models.CharField(max_length="400")
-    imdbrating=models.DecimalField(null=True)
-    description=models.CharField(max_length=250,unique=True)
+    imgpath=models.CharField(max_length=400)
+    imdbrating=models.FloatField(null=True)
+    description=models.CharField(max_length=250,unique=False)
+
+    class Meta:
+      ordering = ['-movieid']
 
 
 class Page(models.Model):

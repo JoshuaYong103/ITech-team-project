@@ -1,78 +1,25 @@
 /*base.html*/
 /*General Spacing*/
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400&display=swap');
 
-.banner {
-    background-color: #6495ED;
-    overflow: hidden;
-    border-style: solid;
-    border-color: #6495ED;
-    border-radius: 5px;
+:root {
+  --primary-color: #047aed;
+  --secondary-color: #1c3fa8;
+  --dark-color: #002240;
+  --light-color: #f4f4f4;
+  --success-color: #5cb85c;
+  --error-color: #d9534f;
 }
 
-.banner a {
-    float:left;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 20px 16px;
-    text-decoration: none;
-    font-size: 17px;
-    border-style: solid;
-    border-color: #6495ED;
-    border-radius: 5px;
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
-.banner a:hover {
-    background-color: #ddd;
-    color: black;
+body {
+  font-family: 'Lato', sans-serif;
+  color: #333;
+  line-height: 1.6;
 }
 
-.banner a.active {
-    background-color: #04AA6D;
-    color: white;
-}
-
-.banner a.space {
-    padding: 15px 400px;
-}
-
-/*index.html  Hompage*/
-
-.index_space {
-    padding: 50px 50px;
-}
-
-.major {
-    font-size: 50px;
-    text-align: center;
-    padding: 5px 200px;
-}
-
-.medium {
-    font-size: 30px;
-    text-align: center;
-    padding: 5px 200px;
-}
-
-.minor {
-    font-size: 18px;
-    text-align: center;
-    padding: 0px 200px;
-}
-
-.welcome_box {
-    border-style: solid;
-    border-color: black;
-    width: 40%;
-    height: 250px;
-    background-color: #F0FFFF;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-
-/* {
- //   background: #000 !important;
-  //  color: #0f0 !important;
-   // outline: solid #f00 1px !important;
-  //} */

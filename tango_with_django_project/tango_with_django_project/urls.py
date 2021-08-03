@@ -26,4 +26,5 @@ urlpatterns = [
     # 3 - The above maps any URLs starting with rango/ to be handled by rango.
     path('admin/', admin.site.urls),
     path('oauth/', include('social_django.urls', namespace='social')), 
+    path('accounts/', include('registration.backends.simple.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

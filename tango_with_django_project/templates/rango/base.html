@@ -15,15 +15,6 @@
         </title>
     </head>
     <body>
-        <!--<div class="banner">
-            <a class="active" ><p id="homepagelink" ><button onclick="homepageLogo()"><img src="{{ MEDIA_URL }}homepagelogo.jpg" alt="A blue background with a white letter D."/></button></p></a>
-            <a href="{% url 'rango:index' %}">Disney Fan Club</a>
-            <a class="space" >  </a>
-            <a href="{% url 'rango:login' %}">Login</a>
-            <a href="{% url 'rango:register' %}">Create Account</a>
-            <a href="{% url 'rango:show_movies' %}">Movies</a>
-            <a href="{% url 'rango:index' %}">Categories</a>
-        </div>-->
         <div>
             {% include 'rango/header.html' %}
         {% block body_block %}

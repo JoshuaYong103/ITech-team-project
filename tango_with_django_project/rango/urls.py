@@ -16,4 +16,5 @@ urlpatterns = [
     path('movielist/', views.show_movies, name='show_movies'),
     path('moviedetail/<str:movieid>/', views.movie_detail, name='movie_detail'),
     path('accounts/', include('allauth.urls')),
+    path('profile/<username>/', views.ProfileView.as_view(), name='profile'),
 ]

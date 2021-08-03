@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path,include
 from rango import views
 
 app_name = 'rango'
@@ -15,4 +15,5 @@ urlpatterns = [
     path('logout/', views.user_logout, name='logout'),
     path('movielist/', views.show_movies, name='show_movies'),
     path('moviedetail/<str:movieid>/', views.movie_detail, name='movie_detail'),
+    path('accounts/', include('allauth.urls')),
 ]

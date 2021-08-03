@@ -17,11 +17,12 @@
 
           {% if user.is_authenticated %}
           <li class="nav-item"><a class="nav-link" href="{% url 'rango:show_movies' %}">Movies</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'rango:logout' %}">Logout</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'auth_logout' %}?next={% url 'rango:index' %}">Logout</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'rango:add_category' %}">Add a New Category</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'auth_password_change' %}">Change Your Password</a></li>
       {% else %}
-          <li class="nav-item"><a class="nav-link" href="{% url 'rango:register' %}">Sign Up</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'rango:login' %}">Login</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'registration_register' %}">Sign Up</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'auth_login' %}">Login</a></li>
       {% endif %}
           <li class="nav-item" ><a class="nav-link" href="{% url 'rango:about' %}">About</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'rango:index' %}">Home</a></li>

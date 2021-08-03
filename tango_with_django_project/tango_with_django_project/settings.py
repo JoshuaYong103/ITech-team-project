@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'social_django', 
+    'registration',
 ]
 
 SITE_ID = 1
@@ -149,8 +150,11 @@ STATICFILES_DIRS = [STATIC_DIR, ]
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
 CRISPY_TEMPLATE_PACK='bootstrap4'
-LOGIN_URL = 'login'
+LOGIN_URL = 'auth_login'
 LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = 'home'
 SOCIAL_AUTH_FACEBOOK_KEY = '1397232393984234'  # App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = 'e7a9f72af9ccca1e6ed7542c191e1f50'  # App Secret
+REGISTRATION_OPEN = True
+REGISTRATION_AUTO_LOGIN = True
+LOGIN_REDIRECT_URL = 'rango:index'

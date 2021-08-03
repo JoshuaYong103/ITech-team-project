@@ -2,12 +2,36 @@
 {% load staticfiles %}
 
 {% block title_block %}
+<script type="text/javascript">
+function validate_form(thisform) {
+  with (thisform) {
+    if (query.value==null || query.value=="") {
+      query.focus();
+      return false;
+    }
+    else {
+      return true;
+    }
+  }
+}
+</script>
     Movie List
 {% endblock %}
 
 {% block body_block %}
 
 {% if user.is_authenticated %}
+<div class="search">
+  <form action="/base/query/"
+  onsubmit="return validate_form(this)"
+  method="post">
+{% csrf_token %}
+
+<input type="text" name="query"
+value="" id="query">
+<input type="submit" value="Search" />
+</form>
+</div>
        <div class="container-fluid"> 
            <div class="row">
                <div class="col">

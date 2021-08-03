@@ -168,7 +168,7 @@ def visitor_cookie_handler(request):
     
     request.session['visits'] = visits
 
-
+@login_required
 def show_movies(request):
     result = requests.get('https://imdb-api.com/en/API/IMDbList/k_6x2ikd97/ls004285275')
     myjson=result.json()
@@ -191,13 +191,21 @@ def show_movies(request):
     except EmptyPage:
         page=paginator.page(paginator.num_pages) 
  
-
-
-
     myresult ={
        'count':paginator.count,
        'page': page
    } 
 
-    print(myresult)
     return render(request, 'rango/movie_mini.html',  myresult )
+  
+  
+
+@login_required
+def movie_detail(request,movieid):
+      print(request.user)
+      username = request.POST.get('username')  
+      myresult ={
+       'username': username
+     } 
+      return render(request, 'rango/movie_detail.html',  myresult )
+    

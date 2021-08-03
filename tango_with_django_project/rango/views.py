@@ -170,31 +170,44 @@ def visitor_cookie_handler(request):
 
 @login_required
 def show_movies(request):
-    result = requests.get('https://imdb-api.com/en/API/IMDbList/k_6x2ikd97/ls004285275')
-    myjson=result.json()
+    
+    fileredpage =""
+    if 'q' in request.GET:
+        q=request.GET['q']
+        fileredpage=MovieLists.objects.filter(title__icontains=q).order_by('-imdbrating')
+        print(q)   
+    else:
+        fileredpage=MovieLists.objects.all().order_by('-imdbrating')
 
-    MovieLists.objects.all().delete()
-   
-    for item in myjson['items']:
-        MovieLists.objects.create(movieid=item['id'], title=item['title'], fullTitle=item['fullTitle'], yearreleased=item['year'], imgpath=item['image'],imdbrating=item['imDbRating'],description=item['description'])
-        
-    myresult= MovieLists.objects.all()
-  
+    if(fileredpage==""):
+        result = requests.get('https://imdb-api.com/en/API/IMDbList/k_6x2ikd97/ls004285275')
+        myjson=result.json()
 
-    paginator=Paginator(myresult,10)
-    page=request.GET.get('page')
+        MovieLists.objects.all().delete()
+    
+        for item in myjson['items']:
+            MovieLists.objects.create(movieid=item['id'], title=item['title'], fullTitle=item['fullTitle'], yearreleased=item['year'], imgpath=item['image'],imdbrating=item['imDbRating'],description=item['description'])
+            
+        myresult= MovieLists.objects.all()
+    
+    else:
+        myresult=fileredpage
 
-    try:
-	    page = paginator.page(page)
-    except PageNotAnInteger:
-	    page = paginator.page(1)
-    except EmptyPage:
-        page=paginator.page(paginator.num_pages) 
- 
-    myresult ={
-       'count':paginator.count,
-       'page': page
-   } 
+
+        paginator=Paginator(myresult,10)
+        page=request.GET.get('page')
+
+        try:
+            page = paginator.page(page)
+        except PageNotAnInteger:
+            page = paginator.page(1)
+        except EmptyPage:
+            page=paginator.page(paginator.num_pages) 
+    
+        myresult ={
+        'count':paginator.count,
+        'page': page
+    } 
 
     return render(request, 'rango/movie_mini.html',  myresult )
   

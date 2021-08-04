@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.forms import widgets
-from rango.models import Page, Category, UserProfile
+from rango.models import MovieCol, Page, Category, UserProfile
 
 # We could add these forms to views.py, but it makes sense to split them off into their own file.
 

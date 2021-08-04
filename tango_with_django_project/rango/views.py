@@ -327,7 +327,7 @@ class MyWatchList(View):
             page=1
         p=Paginator(col_movies,4,request=request)
         col_movies=p.page(page)
-        return render(request,'moviecol.html',{"col_movies":col_movies})
+        return render(request,'watchlist.html',{"col_movies":col_movies})
     
         
     

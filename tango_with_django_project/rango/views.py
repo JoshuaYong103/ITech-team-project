@@ -173,7 +173,6 @@ def visitor_cookie_handler(request):
 
 @login_required
 def show_movies(request):
-    
     fileredpage =""
     if 'q' in request.GET:
         q=request.GET['q']
@@ -181,21 +180,27 @@ def show_movies(request):
         print(q)   
     else:
         fileredpage=MovieLists.objects.all().order_by('-imdbrating')
-
-    if(fileredpage==""):
+    print("hello")
+   
+    if(MovieLists.objects.count()==0):
         result = requests.get('https://imdb-api.com/en/API/IMDbList/k_6x2ikd97/ls004285275')
         myjson=result.json()
+        
 
         MovieLists.objects.all().delete()
     
         for item in myjson['items']:
-            MovieLists.objects.create(movieid=item['id'], title=item['title'], fullTitle=item['fullTitle'], yearreleased=item['year'], imgpath=item['image'],imdbrating=item['imDbRating'],description=item['description'])
+            MovieLists.objects.create(movieid=item['id'], 
+            title=item['title'], fullTitle=item['fullTitle'], 
+            yearreleased=item['year'], imgpath=item['image'],
+            imdbrating=item['imDbRating'],description=item['description'])
+
             
-        myresult= MovieLists.objects.all()
+        myresult = {"count": MovieLists.objects.count(), "page": MovieLists.objects.all().values()}
     
     else:
         myresult=fileredpage
-
+       
 
         paginator=Paginator(myresult,10)
         page=request.GET.get('page')
@@ -210,7 +215,7 @@ def show_movies(request):
         myresult ={
         'count':paginator.count,
         'page': page
-    } 
+        } 
 
     return render(request, 'rango/movie_mini.html',  myresult )
   

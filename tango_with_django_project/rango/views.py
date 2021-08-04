@@ -344,8 +344,11 @@ class ColMovie(View):
             return render(request,'login.html')
         movie_id=request.POST.get("movie_id")
         print(movie_id)
-        fav_movie=MovieCol(user=request.user,movie_id=movie_id)
-        fav_movie.save()
+        find_movies=MovieCol.objects.filter(user=request.user,movie_id=movie_id).count()
+        if find_movies<1:
+            print(find_movies)
+            fav_movie=MovieCol(user=request.user,movie_id=movie_id)
+            fav_movie.save()
         return HttpResponse("well done")
 
 @login_required  

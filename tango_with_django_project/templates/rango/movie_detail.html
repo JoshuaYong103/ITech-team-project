@@ -29,7 +29,7 @@
                         </tr>
                         <tr>
                             <td style="color:#ccc;font-weight:bold;font-style:italic;">
-                                <span class="glyphicon glyphicon-map-marker"></span>&nbsp;Releaed Year
+                                <span class="glyphicon glyphicon-map-marker"></span>&nbsp;Released Year
                             </td>
                             <td>{{ movie.yearreleased }}</td>
                         </tr>
@@ -49,10 +49,13 @@
                 </div>
             </div>
         </div>
-        <form method="post" action="{% url 'fav' %}">
+        <form method="post" action="/add">
             <div class="form-group">
                 <input type="hidden" name="movie_id" value="{{ movie.id }}">
-            <button style="" type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-heart">{% if request.user.id == fav_movie.user_id %}Collect{% else %}Collected{% endif %}</span></button>
+                <a class="btn btn-primary" href="#" role="button">Like</a>
+                <a class="btn btn-primary" href="#" role="button">Add</a>
+                </span>
+                </button>
         </div>
         {% csrf_token %}
         </form>

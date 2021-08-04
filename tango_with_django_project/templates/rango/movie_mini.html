@@ -2,19 +2,6 @@
 {% load staticfiles %}
 
 {% block title_block %}
-<script type="text/javascript">
-function validate_form(thisform) {
-  with (thisform) {
-    if (query.value==null || query.value=="") {
-      query.focus();
-      return false;
-    }
-    else {
-      return true;
-    }
-  }
-}
-</script>
     Movie List
 {% endblock %}
 
@@ -37,7 +24,6 @@ function validate_form(thisform) {
   </div>
 </div>
 
-</div>
        <div class="container-fluid"> 
            <div class="row">
                <div class="col">
@@ -60,6 +46,8 @@ function validate_form(thisform) {
             </div>
             </div>
             </div>
+
+            <div class="pagination-container">
             <nav aria-label="...">
 
             
@@ -86,6 +74,7 @@ function validate_form(thisform) {
             </ul>
           {% endif %}
           </nav>
+        </div>
           </div>
           {% endif %}
 

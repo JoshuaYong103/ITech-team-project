@@ -310,14 +310,20 @@ class ProfileView(View):
         return render(request, 'rango/profile.html', context_dict)
 
 class ColMovie(View):
-    def post(self,request):
+    def addmovie(self,request):
         if not request.user.is_authenticated():
              return render(request,'login.html')
 
         movie_id=request.POST.get("movie_id","")
+        print(movie_id)
         fav_movie=MovieCol(user=request.user,movie_id=movie_id)
         fav_movie.save()
+
+        print(fav_movie)
         return HttpResponse(reverse("detail",args=(movie_id)),{"fav_movie":fav_movie})
+
+
+        
 class MyWatchList(View):
     def get(self,request):
         col_movies=MovieCol.objects.filter(user=request.user)

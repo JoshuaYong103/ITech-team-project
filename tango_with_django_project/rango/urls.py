@@ -11,10 +11,11 @@ urlpatterns = [
     path('category/<slug:category_name_slug>/add_page/', views.add_page, name='add_page'),
     #path('register/', views.register, name='register'),
     #path('login/', views.user_login, name='login'),
-    path('restricted/', views.restricted, name='restricted'),
+    # path('restricted/', views.restricted, name='restricted'),
     #path('logout/', views.user_logout, name='logout'),
     path('movielist/', views.show_movies, name='show_movies'),
     path('moviedetail/<str:movieid>/', views.movie_detail, name='movie_detail'),
     path('accounts/', include('allauth.urls')),
     path('profile/<username>/', views.ProfileView.as_view(), name='profile'),
+    path('addmovie/', views.ColMovie),
 ]

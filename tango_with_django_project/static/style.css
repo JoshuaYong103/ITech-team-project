@@ -11,15 +11,25 @@
   --error-color: #d9534f;
 }
 
+
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
 
-body {
-  font-family: 'Lato', sans-serif;
-  color: #333;
-  line-height: 1.6;
+.pagination-container
+{
+  display: flex;
+  margin-top: 65px;
+  padding-left: 45vw;
+  text-align: left;
 }
+.footer{
+  margin-bottom: 0px;
+	background-color: dark-color;
+  padding: 70px 0;
+}
+/*responsive*/
+
 

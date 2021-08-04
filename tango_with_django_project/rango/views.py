@@ -348,17 +348,19 @@ class ColMovie(View):
         fav_movie.save()
         return HttpResponse("well done")
 
-class MyWatchList(View):
-    @login_required  
-    def get(self,request):
+@login_required  
+def MyWatchList(request):
+        print("Hello")
         col_movies=MovieCol.objects.filter(user=request.user)
-        try:
-            page=request.GET.get('page',1)
-        except PageNotAnInteger:
-            page=1
-        p=Paginator(col_movies,4,request=request)
-        col_movies=p.page(page)
-        return render(request,'watchlist.html',{"col_movies":col_movies})
+        print(col_movies)
+        # try:
+        #     page=request.GET.get('page',1)
+        # except PageNotAnInteger:
+        #     page=1
+        # p=Paginator(col_movies,4,request=request)
+        #col_movies=p.page(page)
+        print("HELL NO")
+        return render(request,'rango/watchlist.html',{"col_movies":col_movies})
     
         
     

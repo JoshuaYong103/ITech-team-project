@@ -20,15 +20,15 @@
           {% if user.is_authenticated %}
           <li class="nav-item"><a class="nav-link" href="{% url 'rango:show_movies' %}">Movies</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'auth_logout' %}?next={% url 'rango:index' %}">Logout</a></li>
-          <!-- <li class="nav-item"><a class="nav-link" href="{% url 'rango:add_category' %}">Add a New Category</a></li> -->
+          <li class="nav-item"><a class="nav-link" href="{% url 'rango:watchlist' %}">Watchlist</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'auth_password_change' %}">Change Your Password</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'rango:profile' user.username %}">Profile</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'rango:likedlist' %}">My Liked Movies</a></li>
       {% else %}
           <li class="nav-item"><a class="nav-link" href="{% url 'registration_register' %}">Sign Up</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'auth_login' %}">Login</a></li>
       {% endif %}
       <li class="nav-item"><a class="nav-link" href="{% url 'rango:index' %}">Home</a></li>
-          <!--<li class="nav-item" ><a class="nav-link" href="{% url 'rango:about' %}">About</a></li>-->
           
       </ul>
         </ul>

@@ -20,5 +20,7 @@ urlpatterns = [
     path('register_profile/', views.RegisterProfileView.as_view(), name='register_profile'),
     path('accounts/', include('registration.backends.simple.urls')),
     path('addmovie/', views.ColMovie.as_view()),
+    path('likemovie/', views.LikeMovie.as_view()),
     path('watchlist/',views.MyWatchList,name="watchlist"),
+    path('likedlist/',views.MyLikedMovies,name="likedlist"),
 ]

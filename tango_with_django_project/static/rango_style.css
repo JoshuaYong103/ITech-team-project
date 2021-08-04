@@ -67,14 +67,57 @@
 .major {
     font-size: 50pt;
     text-align: center;
+    display: block;
 }
 
 .medium {
     font-size: 30pt;
     text-align: center;
+    display: block;
 }
 
 .minor {
     font-size: 25pt;
     text-align: center;
+    display: block;
+}
+
+.image_1 {
+    margin-top: 0px;
+    display: block;
+    margin-left: 50px;
+    margin-right: 0px;
+    float: left;
+}
+
+.image_2 {
+    margin-top: 0px;
+    display: block;
+    margin-right: 50px;
+    margin-left: 0px;
+    float: right;
+}
+
+.image_3 {
+    margin-top: 0px;
+    display: block;
+    margin-left: 80px;
+    margin-right: 0px;
+    float: left;
+}
+
+.image_4 {
+    margin-top: 0px;
+    display: block;
+    margin-right: 80px;
+    margin-left: 0px;
+    float: right;
+}
+
+.central_image {
+    margin-top: 0px;
+    display: block;
+    margin-right: auto;
+    margin-left: 400px;
+    float: center;
 }

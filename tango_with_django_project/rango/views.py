@@ -351,6 +351,20 @@ class ColMovie(View):
             fav_movie.save()
         return HttpResponse("well done")
 
+class LikeMovie(View):
+    @method_decorator(login_required)
+    def post(self,request):
+        if not request.user.is_authenticated:
+            return render(request, 'login.html')
+        movie_id=request.POST.get("movie_id")
+        print(movie_id)
+        find_movies=MovieCol.objects.filter(user=request.user,movie_id=movie_id).count()
+        if find_movies<1:
+            print(find_movies)
+            fav_movie=MovieCol(user=request.user,movie_id=movie_id)
+            fav_movie.save()
+        return HttpResponse("it's done")
+
 @login_required  
 def MyWatchList(request):
         print("Hello")
@@ -364,6 +378,14 @@ def MyWatchList(request):
         #col_movies=p.page(page)
         print("HELL NO")
         return render(request,'rango/watchlist.html',{"col_movies":col_movies})
+
+@login_required
+def MyLikedMovies(request):
+    print("Liked")
+    like_movies=MovieCol.objects.filter(user=request.user)
+    print(like_movies)
+    print("No")
+    return render(request, 'rango/likedlist.html',{"like_movies":like_movies})
     
         
     

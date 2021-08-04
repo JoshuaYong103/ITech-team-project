@@ -58,6 +58,23 @@
 /* profile.html */
 
 .profile_images {
-    width:300;
-    height:300;
+    width:300px;
+    height:300px;
+}
+
+/* index.html */
+
+.major {
+    font-size: 50pt;
+    text-align: center;
+}
+
+.medium {
+    font-size: 30pt;
+    text-align: center;
+}
+
+.minor {
+    font-size: 25pt;
+    text-align: center;
 }

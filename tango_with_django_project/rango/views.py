@@ -228,11 +228,34 @@ def movie_detail(request,movieid):
      } 
       return render(request, 'rango/movie_detail.html',  myresult )
 
-@login_required
-def register_profile(request):
-    form = UserProfileForm()
+# @login_required
+# def register_profile(request):
+   # form = UserProfileForm()
 
-    if request.method == 'POST':
+  #  if request.method == 'POST':
+   #     form = UserProfileForm(request.POST, request.FILES)
+
+   #     if form.is_valid():
+   #         user_profile = form.save(commit=False)
+   #         user_profile.user = request.user
+   #         user_profile.save()
+
+  #          return redirect(reverse('rango:index'))
+  #      else:
+  #          print(form.errors)
+
+  #  context_dict = {'form': form}
+  #  return render(request, 'rango/profile_registration.html', context_dict)
+
+class RegisterProfileView(View):
+    @method_decorator(login_required)
+    def get(self, request):
+        form = UserProfileForm()
+        context_dict = {'form': form}
+        return render(request, 'rango/profile_registration.html', context_dict)
+
+    @method_decorator(login_required)
+    def post(self, request):
         form = UserProfileForm(request.POST, request.FILES)
 
         if form.is_valid():
@@ -244,8 +267,8 @@ def register_profile(request):
         else:
             print(form.errors)
 
-    context_dict = {'form': form}
-    return render(request, 'rango/profile_registration.html', context_dict)
+        context_dict = {'form': form}
+        return render(request, 'rango/profile_registration.html', context_dict)
 
 class ProfileView(View):
     def get_user_details(self, username):

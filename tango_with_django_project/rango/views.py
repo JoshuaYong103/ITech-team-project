@@ -5,7 +5,7 @@ from django.http import HttpResponse, request
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from rango.models import Category, MovieLists, Page, UserProfile
+from rango.models import Category, MovieLists, Page, UserProfile,MovieCol
 from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm
 from datetime import datetime
 from django.core.paginator import PageNotAnInteger, Paginator,EmptyPage
@@ -219,9 +219,12 @@ def show_movies(request):
 @login_required
 def movie_detail(request,movieid):
       print(request.user)
+      movie=MovieLists.objects.get(movieid=movieid)
+      movie.save()
       username = request.POST.get('username')  
       myresult ={
-       'username': username
+       'username': username,
+       'movie': movie
      } 
       return render(request, 'rango/movie_detail.html',  myresult )
 
@@ -305,5 +308,26 @@ class ProfileView(View):
                         'form': form}
 
         return render(request, 'rango/profile.html', context_dict)
+
+class ColMovie(View):
+    def post(self,request):
+        if not request.user.is_authenticated():
+             return render(request,'login.html')
+
+        movie_id=request.POST.get("movie_id","")
+        fav_movie=MovieCol(user=request.user,movie_id=movie_id)
+        fav_movie.save()
+        return HttpResponse(reverse("detail",args=(movie_id)),{"fav_movie":fav_movie})
+class MyWatchList(View):
+    def get(self,request):
+        col_movies=MovieCol.objects.filter(user=request.user)
+        try:
+            page=request.GET.get('page',1)
+        except PageNotAnInteger:
+            page=1
+        p=Paginator(col_movies,4,request=request)
+        col_movies=p.page(page)
+        return render(request,'moviecol.html',{"col_movies":col_movies})
+    
         
     

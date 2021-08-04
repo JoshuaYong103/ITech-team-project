@@ -1,16 +1,67 @@
 {% extends 'rango/base.html' %}
 {% load staticfiles %}
 
+
 {% block title_block %}
     Movie List
 {% endblock %}
 
 {% block body_block %}
 
-{% if user.is_authenticated %}
-       <div class="container-fluid"> 
-              hrllo
-{{myresult}}
+{% if request.user.is_authenticated %}
+<div class="container" style="margin-top:76px">
+    <div class="row">
+        <div class="col-md-8">
+            <div id="moviecontainer"></div>
+        </div>
+        <div class="col-md-4" style="height:500px;">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span class="glyphicon glyphicon-facetime-video"></span>&nbsp;Movie Introduction</h3>
+                </div>
+                <div class="panel-body" style="height:459px;">
+                    <table class="table">
+                        <tr>
+                            <td style="width:30%;color:#ccc;font-weight:bold;font-style:italic;">
+                                <span class="glyphicon glyphicon-film"></span>&nbsp;Name
+                            </td>
+                            <td>{{ movie.title }}</td>
+                        </tr>
+                        <tr>
+                            <td style="color:#ccc;font-weight:bold;font-style:italic;">
+                                <span class="glyphicon glyphicon-map-marker"></span>&nbsp;Releaed Year
+                            </td>
+                            <td>{{ movie.yearreleased }}</td>
+                        </tr>
+                        <tr>
+                            <td style="color:#ccc;font-weight:bold;font-style:italic;">
+                                <span class="glyphicon glyphicon-star"></span>&nbsp;IMDB Rating
+                            </td>
+                            <td>{{ movie.imdbrating }}</td>
+                        </tr>
+                        <tr>
+                            <td style="color:#ccc;font-weight:bold;font-style:italic;">
+                                <span class="glyphicon glyphicon-picture"></span>&nbsp;Description
+                            </td>
+                            <td>
+                            {{ movie.description}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <form method="post" action="{% url 'fav' %}">
+            <div class="form-group">
+                <input type="hidden" name="movie_id" value="{{ movie.id }}">
+            <button style="" type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-heart">{% if request.user.id == fav_movie.user_id %}Collect{% else %}Collected{% endif %}</span></button>
+        </div>
+        {% csrf_token %}
+        </form>
+    </div>
+</div>
+           
+{{movie.title}}
         </div>
         {% endif %}
 

@@ -53,3 +53,11 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+class MovieCol(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    movie=models.ForeignKey(MovieLists,on_delete=models.CASCADE)
+        
+    class Meta:
+        verbose_name='Movie collection'
+        verbose_name_plural=verbose_name

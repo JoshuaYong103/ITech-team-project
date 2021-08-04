@@ -19,5 +19,6 @@ urlpatterns = [
     path('profile/<username>/', views.ProfileView.as_view(), name='profile'),
     path('register_profile/', views.RegisterProfileView.as_view(), name='register_profile'),
     path('accounts/', include('registration.backends.simple.urls')),
-    path('addmovie/', views.ColMovie),
+    path('addmovie/', views.ColMovie.as_view()),
+    path('watchlist/',views.MyWatchList,name="watchlist"),
 ]

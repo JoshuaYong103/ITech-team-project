@@ -1,0 +1,63 @@
+/* movie_mini.html */
+
+.row {
+    max-width:800px;
+    margin:0 auto;
+}
+
+.card {
+    width: 10rem; 
+    margin: 5px;
+}
+
+/* footer.html */
+
+.footer {
+    background-color: black;
+    min-height: 100px;
+    margin-bottom: 0;
+    padding: 0;
+    color: white;
+    position: fixed;
+    width: 100%;
+}
+
+/* header.html */
+
+.header_image {
+    height: 65px;
+}
+
+/* movie_detail.html */
+
+.container {
+    margin-top:76px;   
+}
+
+.col-md-4 {
+    height:500px;
+}
+
+.panel-body {
+    height:459px;
+}
+
+.first_table {
+    width:30%;
+    color:#ccc;
+    font-weight:bold;
+    font-style:italic;
+}
+
+.general_table {
+    color:#ccc;
+    font-weight:bold;
+    font-style:italic;
+}
+
+/* profile.html */
+
+.profile_images {
+    width:300;
+    height:300;
+}

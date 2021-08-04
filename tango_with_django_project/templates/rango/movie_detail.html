@@ -9,42 +9,46 @@
 {% block body_block %}
 
 {% if request.user.is_authenticated %}
-<div class="container" style="margin-top:76px">
+<div class="container">
     <div class="row">
         <div class="col-md-8">
             <div id="moviecontainer"></div>
         </div>
-        <div class="col-md-4" style="height:500px;">
+        <div class="col-md-4">
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h3 class="panel-title"><span class="glyphicon glyphicon-facetime-video"></span>&nbsp;Movie Introduction</h3>
                 </div>
-                <div class="panel-body" style="height:459px;">
+                <div class="panel-body">
                     <table class="table">
                         <tr>
-                            <td style="width:30%;color:#ccc;font-weight:bold;font-style:italic;">
+                            <div class="first_table">
+                            <td>
                                 <span class="glyphicon glyphicon-film"></span>&nbsp;Name
                             </td>
                             <td>{{ movie.title }}</td>
+                            </div>
                         </tr>
+                        <div class="general_table">
                         <tr>
-                            <td style="color:#ccc;font-weight:bold;font-style:italic;">
+                            <td>
                                 <span class="glyphicon glyphicon-map-marker"></span>&nbsp;Released Year
                             </td>
                             <td>{{ movie.yearreleased }}</td>
                         </tr>
                         <tr>
-                            <td style="color:#ccc;font-weight:bold;font-style:italic;">
+                            <td>
                                 <span class="glyphicon glyphicon-star"></span>&nbsp;IMDB Rating
                             </td>
                             <td>{{ movie.imdbrating }}</td>
                         </tr>
                         <tr>
-                            <td style="color:#ccc;font-weight:bold;font-style:italic;">
+                            <td>
                                 <span class="glyphicon glyphicon-picture"></span>&nbsp;Description
                             </td>
                             <td>{{ movie.description}}</td>
                         </tr>
+                        </div>
                     </table>
                 </div>
             </div>

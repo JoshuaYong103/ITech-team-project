@@ -1,4 +1,6 @@
-{% extends 'rango/base.html' %} {% load staticfiles %}
+{% extends 'rango/base.html' %} 
+{% load staticfiles %}
+{% load socialaccount %}
  {% load crispy_forms_tags%} 
 
 {% block title_block %} Login {% endblock %}
@@ -30,6 +32,7 @@ nonce="m26VpH3c">
       data-size="medium" data-button-type="login_with" 
       data-layout="default" 
       data-auto-logout-link="false" data-use-continue-as="false">
+      <a href="{% provider_login_url 'google' %}">Login With Google</a>
       </div>
 
       <!-- </div>

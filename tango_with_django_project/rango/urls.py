@@ -15,7 +15,7 @@ urlpatterns = [
     #path('logout/', views.user_logout, name='logout'),
     path('movielist/', views.show_movies, name='show_movies'),
     path('moviedetail/<str:movieid>/', views.movie_detail, name='movie_detail'),
-    path('accounts/', include('allauth.urls')),
+    #path('accounts/', include('allauth.urls')),
     path('profile/<username>/', views.ProfileView.as_view(), name='profile'),
     path('register_profile/', views.RegisterProfileView.as_view(), name='register_profile'),
     path('accounts/', include('registration.backends.simple.urls')),

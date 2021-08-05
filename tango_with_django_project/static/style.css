@@ -11,24 +11,79 @@
   --error-color: #d9534f;
 }
 
+.pagetitle
+{
+  margin: 0 auto;
+  /* margin: 5px; */
+  height: 40px;
+  text-align: center;
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
 }
-
 .pagination-container
 {
-  display: flex;
-  margin-top: 65px;
-  padding-left: 45vw;
-  text-align: left;
+  margin-top: 55px;
+    margin-left: 45%;
 }
+
 .footer{
   margin-bottom: 0px;
-	background-color: dark-color;
+	background-color:#212529 !important;
   padding: 70px 0;
+ /*-position:absolute !important;*/
+  bottom:0;
+  color:rgba(255,255,255,.55) !important;
+  width:100%;
+  clear: both;
+  text-align: center;
+  padding-top: 25px;
+  z-index: 10;
+  font-size: 12px;
+}
+.footerContent
+{
+  padding:40px;
+ 
+}
+#login_form
+{
+  width: 250px;
+  margin: 0 auto;
+  padding-top: 8%;
+}
+
+#login_form input[type="text"] ,#login_form input[type="password"]
+{
+  width: 100%;
+ border-radius: 6px;
+
+
+}
+#login_form input[type="text"]:focus ,#login_form input[type="password"]:focus 
+{
+  background-color: rgba(1, 1, 2, 0.163);
+ border-color: #01070c;
+ 
+}
+
+.cardMain
+{
+  margin: 0 15%;
+}
+
+.norregistered{
+  font-size: 12px
+}
+
+form#signup {
+  width:400px;
+  margin:0 auto;
+
+
+
+}
+form#signup p {
+  display:block;
+  font-size:14px;
 }
 /*responsive*/
 

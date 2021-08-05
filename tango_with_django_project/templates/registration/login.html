@@ -14,16 +14,17 @@
 src="https://connect.facebook.net/zh_CN/sdk.js#xfbml=1&version=v11.0&appId=1397232393984234&autoLogAppEvents=1" 
 nonce="m26VpH3c">
 </script>
-  <div class="col-md-6">
-    <h3 class="text-center">Login</h3>
+  <div class="col-md-12">
+   
     <form id="login_form" method="post" action=".">
+      <h3 class="pagetitle">LOGIN</h3>
       {% csrf_token %}
       {{ form.as_p }}
-      <input type="submit" value="Log In" />
-      <!-- <input type="submit" name="next" value="{{ next }}" /> -->
-      </form>
+      <div> 
+      <input type="submit" value="Log In" class="btn btn-primary">
+      </div
       <div>
-        <p>
+        <p class="norregistered"> 
           Not registered?
           <a href="{% url 'registration_register' %}">Register Here!</a>
         </p>
@@ -34,6 +35,8 @@ nonce="m26VpH3c">
       data-auto-logout-link="false" data-use-continue-as="false">
       <a href="{% provider_login_url 'google' %}">Login With Google</a>
       </div>
+      </form>
+    
 
       <!-- </div>
     : 

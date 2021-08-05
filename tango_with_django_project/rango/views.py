@@ -5,7 +5,7 @@ from django.http import HttpResponse, request
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from rango.models import Category, MovieLists, Page, UserProfile,MovieCol
+from rango.models import Category, MovieLists, Page, UserProfile,MovieCol,MovieLiked
 from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm
 from datetime import datetime
 from django.core.paginator import PageNotAnInteger, Paginator,EmptyPage
@@ -361,13 +361,13 @@ class LikeMovie(View):
             return render(request, 'login.html')
         movie_id=request.POST.get("movie_id")
         print(movie_id)
-        find_movies=MovieCol.objects.filter(user=request.user,movie_id=movie_id).count()
+        find_movies=MovieLiked.objects.filter(user=request.user,movie_id=movie_id).count()
         if find_movies<1:
             print(find_movies)
-            fav_movie=MovieCol(user=request.user,movie_id=movie_id)
+            fav_movie=MovieLiked(user=request.user,movie_id=movie_id)
             fav_movie.save()
         else:
-            MovieCol.objects.filter(user=request.user,movie_id=movie_id).delete()
+            MovieLiked.objects.filter(user=request.user,movie_id=movie_id).delete()
         return HttpResponse("it's done")
 
 @login_required  
@@ -381,7 +381,7 @@ def MyWatchList(request):
 @login_required
 def MyLikedMovies(request):
     print("Liked")
-    like_movies=MovieCol.objects.filter(user=request.user)
+    like_movies=MovieLiked.objects.filter(user=request.user)
     print(like_movies)
     print("No")
     return render(request, 'rango/likedlist.html',{"like_movies":like_movies})

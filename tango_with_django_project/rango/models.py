@@ -61,3 +61,9 @@ class MovieCol(models.Model):
     class Meta:
         verbose_name='Movie collection'
         verbose_name_plural=verbose_name
+class MovieLiked(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    movie=models.ForeignKey(MovieLists,on_delete=models.CASCADE)
+    class Meta:
+        verbose_name='Movie liked'
+        verbose_name_plural=verbose_name

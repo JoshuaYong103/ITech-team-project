@@ -5,21 +5,33 @@
 {% endblock %}
 
 {% block body_block %}
-<div class="container">
- <div class="row">
 <div class="col-md-12">
+
 
         <div class="form-group" >
             <form role="form" method="post" action="." id="signup_form">
                 <h3 class="pagetitle">REGISTER FORM</h3>
                 {% csrf_token %}
 
-                {{ form.as_p }}
+                {% for field in form %}
+                <p>
+                    <div>
+                    {{field.label_tag}}
+                    </div>
+                    <div class="textboxStyle">
+                    {{field}}
+                    </div>
+                    {% if field.help_text %}
+                        <small style="color: grey;">{{field.help_text}}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <p style="color: grey;">{{error}}</p>
+                    {% endfor %}
+                </p>
+            {% endfor %}
 
                 <input type="submit" value="Register" class="btn btn-dark" />
                 </form>
         </div>
     </div>
-</div> 
-</div>
 {% endblock %}

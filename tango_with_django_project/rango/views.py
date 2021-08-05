@@ -345,10 +345,13 @@ class ColMovie(View):
         movie_id=request.POST.get("movie_id")
         print(movie_id)
         find_movies=MovieCol.objects.filter(user=request.user,movie_id=movie_id).count()
+        print(find_movies)
         if find_movies<1:
             print(find_movies)
             fav_movie=MovieCol(user=request.user,movie_id=movie_id)
             fav_movie.save()
+        else:
+            MovieCol.objects.filter(user=request.user,movie_id=movie_id).delete()
         return HttpResponse("well done")
 
 class LikeMovie(View):
@@ -363,6 +366,8 @@ class LikeMovie(View):
             print(find_movies)
             fav_movie=MovieCol(user=request.user,movie_id=movie_id)
             fav_movie.save()
+        else:
+            MovieCol.objects.filter(user=request.user,movie_id=movie_id).delete()
         return HttpResponse("it's done")
 
 @login_required  
@@ -370,12 +375,6 @@ def MyWatchList(request):
         print("Hello")
         col_movies=MovieCol.objects.filter(user=request.user)
         print(col_movies)
-        # try:
-        #     page=request.GET.get('page',1)
-        # except PageNotAnInteger:
-        #     page=1
-        # p=Paginator(col_movies,4,request=request)
-        #col_movies=p.page(page)
         print("HELL NO")
         return render(request,'rango/watchlist.html',{"col_movies":col_movies})
 

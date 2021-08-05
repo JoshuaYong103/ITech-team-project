@@ -13,7 +13,7 @@ def populate():
       movieList = json.load(a)
     
     users=[
-      ('Tester1','abc12345678','20','Glasgow'),
+      ('test','abc123','20','Glasgow'),
     ]
    
     for movie in movieList['items']:

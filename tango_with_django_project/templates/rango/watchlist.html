@@ -23,23 +23,22 @@
   </div>
   
          <div class="container-fluid"> 
-             <div class="row">
-                 <div class="col">
-                  <div class="row">   
-          
+             <div class="row cardMain">
                     {% for page in col_movies %}
                       <div class="col-md-3">
                         <div class="card">
                         <img src={{page.movie.imgpath}} alt="movie picture" class="card-image-body">
                         <div class="card-body">
-                            {{ page.movie.title}}
-                        </div>
-                       <a href="{%url 'rango:movie_detail' page.movie.movieid  %}">View More</a>
+                          <div><label class="movieDetailLabel">Title : {{ page.movie.title}} </label></div>
+                           <div>  <label class="movieDetailLabel">IMDB Rating : {{ page.movie.imdbrating}}</label> </div>
+                           <div> <label class="movieDetailLabel">Year Released: {{ page.movie.yearreleased}} </label></div>
+                      </div>
+                       <a href="{%url 'rango:movie_detail' page.movie.movieid  %}" class="viewmore">View More</a>
                   </div>
               </div>
               {% endfor %}
-              </div>
-              </div>
+              
+         
               </div>
               <div class="pagination-container">
               <nav aria-label="...">

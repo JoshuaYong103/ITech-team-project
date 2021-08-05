@@ -6,9 +6,13 @@
 {% endblock %}
 
 {% block body_block %}
+<div class="container">
+<ul class="list-group list-group-numbered">
 {% for page in like_movies %}
-
-<p>{{page.movie.title}}</p>
+<li class="list-group-item">
+<label>{{page.movie.title}}</label>
+</li>
 {% endfor %}
-
+</ul>
+</div>
 {% endblock %}

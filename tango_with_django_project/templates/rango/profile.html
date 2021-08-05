@@ -16,9 +16,7 @@
     <div class="row">
         {% if user_profile.picture %}
         <div class="profile_images">
-        <img src="{{ MEDIA_URL }}{{ user_profile.picture }}" width="300" height="300" alt="{{ selected_user.username }}'s profile image" />
-        {% else %}
-        <img src="{{ MEDIA_URL }}cat.jpg" alt="Placeholder image" />
+        <img src="{{ MEDIA_URL }}{{ user_profile.picture }}" width="300px" height="300px" alt="{{ selected_user.username }}'s profile image" />
         </div>
         {% endif %}
         <br />

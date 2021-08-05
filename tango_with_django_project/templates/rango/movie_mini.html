@@ -38,7 +38,7 @@
                            <div>  <label class="movieDetailLabel">IMDB Rating : {{ i.imdbrating}}</label> </div>
                            <div>  <label class="movieDetailLabel">Year Released: {{ i.yearreleased}} </label></div>
                       </div>
-                     <a href="{%url 'rango:movie_detail' i.movieid  %}" class="viewmore">View More</a>
+                     <a href="" onclick=fetch(i.movieid) class="viewmore">View More</a>
 
                 </div>
             </div>
@@ -77,5 +77,18 @@
         </div>
           </div>
           {% endif %}
-
+<script>
+  function fetch(movieid)
+  {
+    var endpoint ='/moviedetail/{{ movieid}}/';
+    $.ajax({
+      url:endpoint,
+      type:"GET",
+      dataType:JSON,
+      data:JSON.stringify({}),
+          success:function(data){
+        }
+    })
+  }
+</script>
   {% endblock %}

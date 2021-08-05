@@ -5,19 +5,21 @@
 {% endblock %}
 
 {% block body_block %}
-<h1>Register Here</h1>
-
 <div class="container">
-    <div class="row">
+ <div class="row">
+<div class="col-md-12">
+
         <div class="form-group" >
-            <form role="form" method="post" action="." id="signup">
+            <form role="form" method="post" action="." id="signup_form">
+                <h3 class="pagetitle">REGISTER FORM</h3>
                 {% csrf_token %}
 
                 {{ form.as_p }}
 
-                <input type="submit" value="Register" />
+                <input type="submit" value="Register" class="btn btn-dark" />
                 </form>
         </div>
     </div>
+</div> 
 </div>
 {% endblock %}

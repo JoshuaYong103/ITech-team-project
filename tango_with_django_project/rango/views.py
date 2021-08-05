@@ -202,7 +202,7 @@ def show_movies(request):
         myresult=fileredpage
        
 
-        paginator=Paginator(myresult,10)
+        paginator=Paginator(myresult,16)
         page=request.GET.get('page')
 
         try:

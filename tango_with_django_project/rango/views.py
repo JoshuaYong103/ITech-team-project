@@ -346,11 +346,13 @@ class ColMovie(View):
         print(movie_id)
         find_movies=MovieCol.objects.filter(user=request.user,movie_id=movie_id).count()
         print(find_movies)
+        #if haven't add this movie then push it to the database
         if find_movies<1:
             print(find_movies)
             fav_movie=MovieCol(user=request.user,movie_id=movie_id)
             fav_movie.save()
         else:
+            #remove from database if already add this movie
             MovieCol.objects.filter(user=request.user,movie_id=movie_id).delete()
         return HttpResponse("well done")
 

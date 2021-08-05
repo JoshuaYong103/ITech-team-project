@@ -2,16 +2,21 @@
 {% load staticfiles %}
 
 {% block title_block %}
-    About Rango
+    Like Our Website
 {% endblock %}
 
 {% block body_block %}
-<h1>Rango says...</h1>
+<h1>Like Our Website</h1>
 <div>
-    here is the about page. <br />
-    This tutorial has been put together by David Maxwell.<br />
-    <p>Visits: {{ visits }}</p>
+    <strong id="like_count">{{ about.likes }}</strong> likes
+    {% if user.is_authenticated %}
+    <button id="like_btn"
+            data-aboutid="{{ about.id }}"
+            class="btn btn-primary btn-sm"
+            type="button">
+        <span data-feather="thumbs-up"></span>
+        Like
+    </button>
+    {% endif %}
 </div>
-<img src="{% static 'images/rango.jpg' %}" alt="Picture of Rango" />
-<img src="{{ MEDIA_URL }}cat.jpg" alt="Picture of a Cat" />
 {% endblock %}

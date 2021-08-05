@@ -4,7 +4,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tango_with_django_project.setti
 
 import django
 django.setup()
-from rango.models import MovieLists,UserProfile,User
+from rango.models import MovieLists,UserProfile,User, Category, Page
 
 # For an explanation of what is going on here, please refer to the TwD book.
 
@@ -20,6 +20,7 @@ def populate():
         add_movies(movie["id"],movie["title"], movie["fullTitle"],movie["year"],movie["image"],movie["imDbRating"],movie["description"])
     for i,j,k,m in users:
         add_user(i,j,k,m)
+
 def add_movies(movieid, title, fullTitle,yearreleased,imgpath,imdbrating,description):
     c = MovieLists.objects.get_or_create(movieid=movieid)[0]
     c.movieid = movieid

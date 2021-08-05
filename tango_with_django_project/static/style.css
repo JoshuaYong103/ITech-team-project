@@ -11,6 +11,30 @@
   --error-color: #d9534f;
 }
 
+.moviedetailContainer{
+  max-height:500px;
+  margin-bottom: 50px
+}
+
+.moviedetailform{
+  position: absolute;
+  top: 60vh;
+}
+
+.viewmore
+{
+  text-align: right;
+  font-size: 14px;
+  margin-right: 18px;
+  margin-bottom: 8px;
+}
+.movieDetailLabel
+{
+  font-size: 14px;
+  width: 100%;
+  margin-bottom: 1px;
+  background-color: #b2cfd9;
+}
 .pagetitle
 {
   margin: 0 auto;

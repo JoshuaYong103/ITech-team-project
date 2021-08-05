@@ -34,11 +34,11 @@
                       <div class="card">
                       <img src={{i.imgpath}} alt="movie picture" class="card-image-body">
                       <div class="card-body">
-                          {{ i.title}}
-                           <div>{{ i.imdbrating}}</div>
-                           <div>{{ i.yearreleased}}</div>
+                          <div>  <label class="movieDetailLabel">Title : {{ i.title}} </label></div>
+                           <div>  <label class="movieDetailLabel">IMDB Rating : {{ i.imdbrating}}</label> </div>
+                           <div>  <label class="movieDetailLabel">Year Released: {{ i.yearreleased}} </label></div>
                       </div>
-                     <a href="{%url 'rango:movie_detail' i.movieid  %}">View More</a>
+                     <a href="{%url 'rango:movie_detail' i.movieid  %}" class="viewmore">View More</a>
 
                 </div>
             </div>

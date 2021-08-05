@@ -13,7 +13,7 @@ def populate():
       movieList = json.load(a)
     
     users=[
-      ('Tester1','12345678','20','Glasgow'),
+      ('Tester1','abc12345678','20','Glasgow'),
     ]
    
     for movie in movieList['items']:
@@ -32,7 +32,9 @@ def add_movies(movieid, title, fullTitle,yearreleased,imgpath,imdbrating,descrip
     c.save()
     return c
 def add_user(username,password,age,location):
-    user=User.objects.get_or_create(username=username,password=password)[0]
+    user=User.objects.get_or_create(username=username)[0]
+    user.set_password(password)
+    user.save()
     print(user.username)
     print(user,password)
     u=UserProfile.objects.get_or_create(user=user)[0]

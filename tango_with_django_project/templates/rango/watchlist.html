@@ -6,9 +6,66 @@
 {% endblock %}
 
 {% block body_block %}
-{% for page in col_movies %}
-
-<p>{{page.movie.title}}</p>
-{% endfor %}
-
+<!-- Search Section -->
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-8 offset-2">
+            <form>
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control form-control-lg" placeholder="Search" />
+                    <div class="input-group-append">
+                    <button class="btn btn-dark btn-lg" type="submit" id="button-addon2">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+  
+         <div class="container-fluid"> 
+             <div class="row">
+                 <div class="col">
+                  <div class="row">   
+          
+                    {% for page in col_movies %}
+                      <div class="col-md-3">
+                        <div class="card">
+                        <img src={{page.movie.imgpath}} alt="movie picture" class="card-image-body">
+                        <div class="card-body">
+                            {{ page.movie.title}}
+                        </div>
+                       <a href="{%url 'rango:movie_detail' page.movie.movieid  %}">View More</a>
+                  </div>
+              </div>
+              {% endfor %}
+              </div>
+              </div>
+              </div>
+              <div class="pagination-container">
+              <nav aria-label="...">
+              {% if page.has_other_pages %}
+              <ul class="pagination">
+             {% if page.has_previous %}
+               <li class="page-item"><a class="page-link"  href="?page={{ page.previous_page_number }}">«</a></li>
+             {% else %}
+               <li class="disabled"><span>Previous</span></li>
+             {% endif %}
+             {% for i in page.paginator.page_range %}
+               {% if page.number == i %}
+              <li class="page-item active">
+                <a class="page-link" href="#">{{ i }} </a>
+               {% else %}
+               <li class="page-item"><a  class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+               {% endif %}
+             {% endfor %}
+             {% if page.has_next %}
+             <li class="page-item"><a class="page-link" href="?page={{ page.next_page_number }}">Next</a></li>
+             {% else %}
+               <li class="disabled"><span>»</span></li>
+             {% endif %}
+              </ul>
+            {% endif %}
+            </nav>
+          </div>
+            </div>
 {% endblock %}

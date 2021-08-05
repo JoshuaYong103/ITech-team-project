@@ -1,67 +1,51 @@
 import os
+import json
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tango_with_django_project.settings')
 
 import django
 django.setup()
-from rango.models import Category, Page
+from rango.models import Category, Page,MovieCol,MovieLists
 
 # For an explanation of what is going on here, please refer to the TwD book.
 
-def populate():
-    python_pages = [
-        {'title': 'Official Python Tutorial',
-         'url':'http://docs.python.org/3/tutorial/',
-         'views': 114,},
-        {'title':'How to Think like a Computer Scientist',
-         'url':'http://www.greenteapress.com/thinkpython/',
-         'views': 53},
-        {'title':'Learn Python in 10 Minutes',
-         'url':'http://www.korokithakis.net/tutorials/python/',
-         'views': 20} ]
+def populate():  
+    with open('data.json',encoding='utf8') as a:
+      movieList = json.load(a)
+       
+    # cats = {'Python': {'pages': python_pages, 'views': 128, 'likes': 64},
+    #         'Django': {'pages': django_pages, 'views': 64, 'likes': 32},
+    #         'Other Frameworks': {'pages': other_pages, 'views': 32, 'likes': 16} }
     
-    django_pages = [
-        {'title':'Official Django Tutorial',
-         'url':'https://docs.djangoproject.com/en/2.1/intro/tutorial01/',
-         'views': 32},
-        {'title':'Django Rocks',
-         'url':'http://www.djangorocks.com/',
-         'views': 12},
-        {'title':'How to Tango with Django',
-         'url':'http://www.tangowithdjango.com/',
-         'views': 1258} ]
     
-    other_pages = [
-        {'title':'Bottle',
-         'url':'http://bottlepy.org/docs/dev/',
-         'views': 54},
-        {'title':'Flask',
-         'url':'http://flask.pocoo.org',
-         'views': 64} ]
-    
-    cats = {'Python': {'pages': python_pages, 'views': 128, 'likes': 64},
-            'Django': {'pages': django_pages, 'views': 64, 'likes': 32},
-            'Other Frameworks': {'pages': other_pages, 'views': 32, 'likes': 16} }
-    
-    for cat, cat_data in cats.items():
-        c = add_cat(cat, views=cat_data['views'], likes=cat_data['likes'])
-        for p in cat_data['pages']:
-            add_page(c, p['title'], p['url'], views=p['views'])
-    
-    for c in Category.objects.all():
-        for p in Page.objects.filter(category=c):
-            print(f'- {c}: {p}')
+    #movieList = moviedetailLists.json()
 
-def add_page(cat, title, url, views=0):
-    p = Page.objects.get_or_create(category=cat, title=title)[0]
-    p.url=url
-    p.views=views
-    p.save()
-    return p
 
-def add_cat(name, views=0, likes=0):
-    c = Category.objects.get_or_create(name=name)[0]
-    c.views = views
-    c.likes = likes
+      for movie in movieList['items']:
+          add_movies(movie["id"],movie["title"], movie["fullTitle"],movie["year"],movie["image"],movie["imDbRating"],movie["description"])
+
+      #  c =add_movies(movie["movieid"],movie["title"], mo vie["fullTitle"],movie["yearreleased"],movie["imgpath"],movie["imdbrating"],movie["description"] )
+     
+    
+    # for c in Category.objects.all():
+    #     for p in Page.objects.filter(category=c):
+    #         print(f'- {c}: {p}')
+
+# def add_page(cat, title, url, views=0):
+#     p = Page.objects.get_or_create(category=cat, title=title)[0]
+#     p.url=url
+#     p.views=views
+#     p.save()
+#     return p
+
+def add_movies(movieid, title, fullTitle,yearreleased,imgpath,imdbrating,description):
+    c = MovieLists.objects.get_or_create(movieid=movieid)[0]
+    c.movieid = movieid
+    c.title = title
+    c.fullTitle = fullTitle
+    c.yearreleased = yearreleased
+    c.imgpath = imgpath
+    c.imdbrating = imdbrating
+    c.description=description
     c.save()
     return c
 

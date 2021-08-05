@@ -181,7 +181,7 @@ def show_movies(request):
     else:
         fileredpage=MovieLists.objects.all().order_by('-imdbrating')
     print("hello")
-   
+   #make sure it reads from the API when the database is empty
     if(MovieLists.objects.count()==0):
         result = requests.get('https://imdb-api.com/en/API/IMDbList/k_6x2ikd97/ls004285275')
         myjson=result.json()
@@ -375,6 +375,7 @@ class LikeMovie(View):
 @login_required  
 def MyWatchList(request):
         print("Hello")
+        #filter all collected movie to show in the watchlist
         col_movies=MovieCol.objects.filter(user=request.user)
         print(col_movies)
         print("HELL NO")

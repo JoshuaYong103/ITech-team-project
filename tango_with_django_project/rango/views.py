@@ -122,6 +122,7 @@ def visitor_cookie_handler(request):
     
     request.session['visits'] = visits
 
+#This function fetches the entire list of movies for a logged in user
 @login_required
 def show_movies(request):
     fileredpage =""
@@ -132,7 +133,7 @@ def show_movies(request):
         print(q)   
     else:
         fileredpage=MovieLists.objects.all().order_by('-imdbrating')
-    print("hello")
+
    #make sure it reads from the API when the database is empty
     if(MovieLists.objects.count()==0):
         result = requests.get('https://imdb-api.com/en/API/IMDbList/k_6x2ikd97/ls004285275')
@@ -153,7 +154,7 @@ def show_movies(request):
     else:
         myresult=fileredpage
        
-
+       #code for pagination
         paginator=Paginator(myresult,16)
         page=request.GET.get('page')
 
@@ -173,6 +174,7 @@ def show_movies(request):
   
   
 
+#This function fetches the selected movie detail information for a authenticated user
 @login_required
 def movie_detail(request,movieid):
       print(request.user)

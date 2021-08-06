@@ -20,6 +20,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+#model to store the entire list of all available disney movies
 class MovieLists(models.Model):
     movieid=models.CharField(primary_key=True,max_length=15,unique=True)
     title=models.CharField(max_length=120,unique=False)

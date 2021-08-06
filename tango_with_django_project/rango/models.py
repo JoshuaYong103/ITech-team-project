@@ -20,6 +20,20 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+class About(models.Model):
+    likes = models.IntegerField(default=0)
+    slug = models.SlugField(unique=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(About, self).save(*args, **kwargs)
+
+    class Meta:
+        verbose_name_plural = 'Abouts'
+
+    def __str__(self):
+        return self.likes
+
 class MovieLists(models.Model):
     movieid=models.CharField(primary_key=True,max_length=15,unique=True)
     title=models.CharField(max_length=120,unique=False)

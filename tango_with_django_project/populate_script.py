@@ -4,7 +4,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tango_with_django_project.setti
 
 import django
 django.setup()
-from rango.models import MovieLists,UserProfile,User
+from rango.models import MovieLists,UserProfile,User,MovieCol,MovieLiked
 
 # For an explanation of what is going on here, please refer to the TwD book.
 
@@ -42,7 +42,15 @@ def add_user(username,password,age,location):
     u.age=age
     u.location=location
     u.save()
-    return u
+    add_movie_to_likelist(user)
+    add_movie_to_watchlist(user)
+    return u,user
+def add_movie_to_watchlist(user):
+    fav_movie=MovieCol(user=user,movie_id="tt0299977")
+    fav_movie.save()
+def add_movie_to_likelist(user):
+    Movie_Liked=MovieLiked(user=user,movie_id="tt0118694")
+    Movie_Liked.save()
 # Start execution here!
 if __name__ == '__main__':
     print('Starting Rango population script...')

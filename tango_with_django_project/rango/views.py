@@ -5,7 +5,7 @@ from django.http import HttpResponse, request
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from rango.models import Category, MovieLists, Page, UserProfile,MovieCol,MovieLiked
+from rango.models import Category, MovieLists, Page, UserProfile,MovieCol,MovieLiked,About
 from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm
 from datetime import datetime
 from django.core.paginator import PageNotAnInteger, Paginator,EmptyPage
@@ -96,61 +96,9 @@ def add_page(request, category_name_slug):
     context_dict = {'form': form, 'category': category}
     return render(request, 'rango/add_page.html', context=context_dict)
 
-# def register(request):
-  #  registered = False
-
-  #  if request.method == 'POST':
-  #      user_form = UserForm(request.POST)
- #       profile_form = UserProfileForm(request.POST)
-#
-  #      if user_form.is_valid() and profile_form.is_valid():
-  #          user = user_form.save()
-   #         user.set_password(user.password)
-  #          user.save()
-
-  #          profile = profile_form.save(commit=False)
-  #          profile.user = user
-
-   #         if 'picture' in request.FILES:
-   #             profile.picture = request.FILES['picture']
-            
-   #         profile.save()
-  #          registered = True
-  #      else:
-   #         print(user_form.errors, profile_form.errors)
- #   else:
-     #   user_form = UserForm()
-     #   profile_form = UserProfileForm()
-    
-   # return render(request, 'rango/register.html', context={'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
-
-#def user_login(request):
-   # if request.method == 'POST':
-    #    username = request.POST.get('username')
-     #   password = request.POST.get('password')
-
-     #   user = authenticate(username=username, password=password)
-
-    #    if user:
-     #       if user.is_active:
-     #           login(request, user)
-     #           return redirect(reverse('rango:index'))
-     #       else:
-     #           return HttpResponse("Your Rango account is disabled.")
-    #    else:
-    #        print(f"Invalid login details: {username}, {password}")
-     #       return HttpResponse("Invalid login details supplied.")
-   # else:
-    #    return render(request, 'rango/login.html')
-
 @login_required
 def restricted(request):
     return render(request, 'rango/restricted.html')
-
-#@login_required
-#def user_logout(request):
-#    logout(request)
- #   return redirect(reverse('rango:index'))
 
 def get_server_side_cookie(request, cookie, default_val=None):
     val = request.session.get(cookie)
@@ -232,25 +180,6 @@ def movie_detail(request,movieid):
        'movie': movie
      } 
       return render(request, 'rango/movie_detail.html',  myresult )
-
-# @login_required
-# def register_profile(request):
-   # form = UserProfileForm()
-
-  #  if request.method == 'POST':
-   #     form = UserProfileForm(request.POST, request.FILES)
-
-   #     if form.is_valid():
-   #         user_profile = form.save(commit=False)
-   #         user_profile.user = request.user
-   #         user_profile.save()
-
-  #          return redirect(reverse('rango:index'))
-  #      else:
-  #          print(form.errors)
-
-  #  context_dict = {'form': form}
-  #  return render(request, 'rango/profile_registration.html', context_dict)
 
 class RegisterProfileView(View):
     @method_decorator(login_required)
@@ -389,5 +318,19 @@ def MyLikedMovies(request):
     print("No")
     return render(request, 'rango/likedlist.html',{"like_movies":like_movies})
     
-        
+class LikeAboutView(View):
+    @method_decorator(login_required)
+    def get(self, request):
+        about_id = request.GET['about_id']
+
+        try:
+            about = About.objects.get(id=int(about_id))
+        except ValueError:
+            return HttpResponse(-1)
+
+        about.likes = about.likes + 1
+        about.save()
+
+        return HttpResponse(about.likes)
+            
     

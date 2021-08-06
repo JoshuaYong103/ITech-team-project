@@ -44,12 +44,13 @@ def add_user(username,password,age,location):
     u.save()
     add_movie_to_likelist(user)
     add_movie_to_watchlist(user)
-    return u,user
+    return u
 def add_movie_to_watchlist(user):
-    fav_movie=MovieCol(user=user,movie_id="tt0299977")
+    fav_movie=MovieCol(user=user,movie_id="tt0029583")
+    print(fav_movie)
     fav_movie.save()
 def add_movie_to_likelist(user):
-    Movie_Liked=MovieLiked(user=user,movie_id="tt0118694")
+    Movie_Liked=MovieLiked(user=user,movie_id="tt0038718")
     Movie_Liked.save()
 # Start execution here!
 if __name__ == '__main__':

@@ -23,4 +23,6 @@ urlpatterns = [
     path('likemovie/', views.LikeMovie.as_view()),
     path('watchlist/',views.MyWatchList,name="watchlist"),
     path('likedlist/',views.MyLikedMovies,name="likedlist"),
+    path('like_category/', views.LikeCategoryView.as_view(), name='like_category'),
+    path('thank_you/', views.thank_you, name='thank_you'),
 ]

@@ -1,0 +1,14 @@
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Like Our Website
+{% endblock %}
+
+{% block body_block %}
+<h1>Like Our Website</h1>
+<div>
+    <h1>Thank you for liking our site!</h1>
+    <strong id="like_count">{{ category.likes }}</strong> likes
+</div>
+{% endblock %}

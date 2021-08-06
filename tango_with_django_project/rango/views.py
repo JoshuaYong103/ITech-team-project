@@ -5,7 +5,7 @@ from django.http import HttpResponse, request
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from rango.models import Category, MovieLists, Page, UserProfile,MovieCol,MovieLiked,About
+from rango.models import Category, MovieLists, Page, UserProfile,MovieCol,MovieLiked
 from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm
 from datetime import datetime
 from django.core.paginator import PageNotAnInteger, Paginator,EmptyPage
@@ -34,6 +34,10 @@ def about(request):
     context_dict['visits'] = request.session['visits']
 
     return render(request, 'rango/about.html', context=context_dict)
+
+def thank_you(request):
+
+    return render(request, 'rango/thank_you.html')
 
 def show_category(request, category_name_slug):
     context_dict = {}
@@ -326,19 +330,21 @@ def MyLikedMovies(request):
     print("No")
     return render(request, 'rango/likedlist.html',{"like_movies":like_movies})
     
-class LikeAboutView(View):
+class LikeCategoryView(View):
     @method_decorator(login_required)
     def get(self, request):
-        about_id = request.GET['about_id']
+        category_id = request.GET['category_id']
 
         try:
-            about = About.objects.get(id=int(about_id))
+            category = Category.objects.get(id=int(category_id))
+        except Category.DoesNotExist:
+            return HttpResponse(-1)
         except ValueError:
             return HttpResponse(-1)
 
-        about.likes = about.likes + 1
-        about.save()
+        category.likes = category.likes + 1
+        category.save()
 
-        return HttpResponse(about.likes)
+        return HttpResponse(category.likes)
             
     

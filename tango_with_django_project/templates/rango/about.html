@@ -8,10 +8,10 @@
 {% block body_block %}
 <h1>Like Our Website</h1>
 <div>
-    <strong id="like_count">{{ about.likes }}</strong> likes
+    <strong id="like_count">{{ category.likes }}</strong> likes
     {% if user.is_authenticated %}
     <button id="like_btn"
-            data-aboutid="{{ about.id }}"
+            data-categoryid="{{ category.id }}"
             class="btn btn-primary btn-sm"
             type="button">
         <span data-feather="thumbs-up"></span>

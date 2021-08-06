@@ -54,7 +54,7 @@
   width:75%;
 }
 
-.textboxStyle input[type="text"] ,.textboxStyle input[type="password"],.textboxStyle input[type="email"]
+.textboxStyle input[type="text"] ,.textboxStyle input[type="password"],.textboxStyle input[type="email"],.textboxStyle input[type="number"],.textboxStyle input[type="file"]
 {
   width: 100%;
  border-radius: 6px;
@@ -79,6 +79,21 @@
 {
   padding:40px;
  
+}
+
+.centerform
+{
+  width: 450px;
+  margin: 0 auto;
+  padding-top: 8%;
+
+}
+
+.clear { clear: both; height: 150px; }
+
+.formButtonSubmit
+{
+  margin-top: 15px;
 }
 #login_form
 {

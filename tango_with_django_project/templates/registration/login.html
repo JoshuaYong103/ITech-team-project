@@ -20,7 +20,7 @@ nonce="m26VpH3c">
       <h3 class="pagetitle">LOGIN</h3>
       {% csrf_token %}
       {{ form.as_p }}
-      <div> 
+      <div class="formButtonSubmit"> 
       <input type="submit" value="Log In" class="btn btn-dark">
       </div>
       <div>
@@ -35,6 +35,7 @@ nonce="m26VpH3c">
       data-auto-logout-link="false" data-use-continue-as="false">
       <a href="{% provider_login_url 'google' %}">Login With Google</a>
       </div>
+      <div class="clear"></div>
       </form>
     
   </div>

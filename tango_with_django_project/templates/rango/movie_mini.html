@@ -81,8 +81,8 @@
 <script>
   function fetch(movieid)
   {
+    var endpoint ="/moviedetail/"+movieid+"/";
     alert(":hello");
-    var endpoint ='/moviedetail/'+movieid+"/";
     $.ajax({
       url:endpoint,
       type:"GET",

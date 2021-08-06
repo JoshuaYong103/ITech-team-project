@@ -9,7 +9,7 @@
 
 
         <div class="form-group" >
-            <form role="form" method="post" action="." id="signup_form">
+            <form role="form" method="post" action="." class="centerform">
                 <h3 class="pagetitle">REGISTER FORM</h3>
                 {% csrf_token %}
 
@@ -29,8 +29,10 @@
                     {% endfor %}
                 </p>
             {% endfor %}
-
+<div class="formButtonSubmit">
                 <input type="submit" value="Register" class="btn btn-dark" />
+            </div>
+            <div class="clear"></div>
                 </form>
         </div>
     </div>

@@ -71,3 +71,9 @@ class MovieLiked(models.Model):
     class Meta:
         verbose_name='Movie liked'
         verbose_name_plural=verbose_name
+class WebsiteLiked(models.Model):
+    likes=models.IntegerField(default=0)
+    id=models.IntegerField(primary_key=True)
+    class Meta:
+        verbose_name='Web liked'
+        verbose_name_plural=verbose_name

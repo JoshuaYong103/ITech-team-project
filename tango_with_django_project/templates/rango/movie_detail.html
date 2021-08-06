@@ -76,17 +76,21 @@
         {% endblock %}
 {% block js %}
 <script type="text/javascript">
+    //create eventlistener to handle the event 
      let btnAdd =document.getElementById('btn-add')
      btnAdd.addEventListener('click',() =>{
          console.log('add')
+         //get the movieid by click the add button
          console.log(btnAdd.dataset.id)
          let movieid=btnAdd.dataset.id
          let request = new XMLHttpRequest()
+         //use addmoive function through its url
          request.open("POST","/rango/addmovie/")
          request.onreadystatechange = () => {console.log(request.status)}
          const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
          request.setRequestHeader('X-CSRFToken', csrftoken)
          request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+         //send the movie_id to the back end
          request.send('movie_id='+movieid)
          
         })

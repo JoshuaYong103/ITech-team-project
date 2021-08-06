@@ -1,9 +1,11 @@
 $(document).ready(function() {
     $('#like_btn').click(function() {
-        var categoryIdVar;
-        categoryIdVar = $(this).attr('data-categoryid');
-
-        $.get('/rango/thank_you',
+        var categoryLiked;
+        categoryLiked = $(this).attr('data-liked');
+        console.log(categoryLiked);
+        console.log("Testing");
+        $.get('/rango/like_category/',
+        {'category_liked':categoryLiked},
         function(data) {
             $('#like_count').html(data);
             $('#like_btn').hide();

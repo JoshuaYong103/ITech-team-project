@@ -5,7 +5,7 @@ from django.http import HttpResponse, request
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from rango.models import Category, MovieLists, Page, UserProfile,MovieCol,MovieLiked
+from rango.models import Category, MovieLists, Page, UserProfile,MovieCol,MovieLiked,WebsiteLiked
 from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm
 from datetime import datetime
 from django.core.paginator import PageNotAnInteger, Paginator,EmptyPage
@@ -333,18 +333,12 @@ def MyLikedMovies(request):
 class LikeCategoryView(View):
     @method_decorator(login_required)
     def get(self, request):
-        category_id = request.GET['category_id']
+        category_liked = request.GET['category_liked']
+        print(category_liked)
+        websitelikes=WebsiteLiked.objects.get_or_create(id=1)[0]
+        websitelikes.likes=websitelikes.likes+1
+        websitelikes.save()
 
-        try:
-            category = Category.objects.get(id=int(category_id))
-        except Category.DoesNotExist:
-            return HttpResponse(-1)
-        except ValueError:
-            return HttpResponse(-1)
-
-        category.likes = category.likes + 1
-        category.save()
-
-        return HttpResponse(category.likes)
+        return HttpResponse(websitelikes.likes)
             
     

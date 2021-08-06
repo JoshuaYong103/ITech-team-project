@@ -29,7 +29,6 @@ def index(request):
     return render(request, 'rango/index.html', context=context_dict)
 
 def about(request):
-    # Spoiler: now you DO need a context dictionary!
     context_dict = {}
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
@@ -124,12 +123,13 @@ def show_movies(request):
     fileredpage =""
     if 'q' in request.GET:
         q=request.GET['q']
+        #if read from the database, order the movie by its imdbrating
         fileredpage=MovieLists.objects.filter(title__icontains=q).order_by('-imdbrating')
         print(q)   
     else:
         fileredpage=MovieLists.objects.all().order_by('-imdbrating')
     print("hello")
-   #make sure it reads from the API when the database is
+   #make sure it reads from the API when the database is empty
     if(MovieLists.objects.count()==0):
         result = requests.get('https://imdb-api.com/en/API/IMDbList/k_6x2ikd97/ls004285275')
         myjson=result.json()
@@ -271,6 +271,7 @@ class ColMovie(View):
     def post(self,request):
         if not request.user.is_authenticated:
             return render(request,'login.html')
+        #get the movie_id from the front end
         movie_id=request.POST.get("movie_id")
         print(movie_id)
         find_movies=MovieCol.objects.filter(user=request.user,movie_id=movie_id).count()
@@ -280,6 +281,7 @@ class ColMovie(View):
             print(find_movies)
             fav_movie=MovieCol(user=request.user,movie_id=movie_id)
             fav_movie.save()
+        #if =1 means there is already one been created
         else:
             #remove from database if already add this movie
             MovieCol.objects.filter(user=request.user,movie_id=movie_id).delete()
@@ -290,14 +292,19 @@ class LikeMovie(View):
     def post(self,request):
         if not request.user.is_authenticated:
             return render(request, 'login.html')
+        #get the movie_id from the front end
         movie_id=request.POST.get("movie_id")
         print(movie_id)
+        #check how many instance are created for the same movie
         find_movies=MovieLiked.objects.filter(user=request.user,movie_id=movie_id).count()
+        #if <1 means haven't been created and load into the database
         if find_movies<1:
             print(find_movies)
             fav_movie=MovieLiked(user=request.user,movie_id=movie_id)
             fav_movie.save()
+        #if =1 means there is already one been created
         else:
+        #remove from database if already add this movie
             MovieLiked.objects.filter(user=request.user,movie_id=movie_id).delete()
         return HttpResponse("it's done")
 
@@ -313,6 +320,7 @@ def MyWatchList(request):
 @login_required
 def MyLikedMovies(request):
     print("Liked")
+    #filter all collected movie to show in the watchlist
     like_movies=MovieLiked.objects.filter(user=request.user)
     print(like_movies)
     print("No")

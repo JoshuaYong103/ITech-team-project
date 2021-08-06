@@ -58,8 +58,9 @@ class Page(models.Model):
 
     def __str__(self):
         return self.title
-
+#model for user profile
 class UserProfile(models.Model):
+    #each user has its own profile
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     age = models.IntegerField(default=10,null=False)
     location = models.CharField(max_length=150,null=False)
@@ -67,14 +68,17 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
-
+#model for moviecollection
 class MovieCol(models.Model):
+    #a user can have many collected movies
     user=models.ForeignKey(User,on_delete=models.CASCADE)
+    #a movie can be collected by many collections
     movie=models.ForeignKey(MovieLists,on_delete=models.CASCADE)
         
     class Meta:
         verbose_name='Movie collection'
         verbose_name_plural=verbose_name
+#model for movie get liked
 class MovieLiked(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     movie=models.ForeignKey(MovieLists,on_delete=models.CASCADE)

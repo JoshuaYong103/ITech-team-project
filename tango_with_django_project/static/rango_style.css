@@ -1,6 +1,10 @@
 /* movie_mini.html */
 
-
+.usernameDetails
+{
+  color:rgb(167, 182, 186);  
+  margin-right:10px;
+}
 
 .card {
     width: 100%;

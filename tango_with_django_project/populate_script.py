@@ -5,6 +5,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tango_with_django_project.setti
 import django
 django.setup()
 from rango.models import MovieLists,UserProfile,User,MovieCol,MovieLiked
+from django.db import IntegrityError
 
 # For an explanation of what is going on here, please refer to the TwD book.
 
@@ -20,6 +21,7 @@ def populate():
         add_movies(movie["id"],movie["title"], movie["fullTitle"],movie["year"],movie["image"],movie["imDbRating"],movie["description"])
     for i,j,k,m in users:
         add_user(i,j,k,m)
+    create_super_user('admin','admin@test.com','admin')
 def add_movies(movieid, title, fullTitle,yearreleased,imgpath,imdbrating,description):
     c = MovieLists.objects.get_or_create(movieid=movieid)[0]
     c.movieid = movieid
@@ -52,6 +54,17 @@ def add_movie_to_watchlist(user):
 def add_movie_to_likelist(user):
     Movie_Liked=MovieLiked(user=user,movie_id="tt0038718")
     Movie_Liked.save()
+def create_super_user(username, email, password):
+    '''
+    for some reason get_or_create didn't work with creating the
+    SuperUser so here is a try/except, with an IntegrityError
+    raised if the SuperUser already exists
+    '''
+    try:
+        u = User.objects.create_superuser(username, email, password)
+        return u
+    except IntegrityError:
+        pass
 # Start execution here!
 if __name__ == '__main__':
     print('Starting Rango population script...')
